@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weed Farm Live | Autonomous Grow</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <div class="brand">
+          <span class="logo">🌱</span>
+          <div>
+            <div class="brand-title">Weed Farm Live</div>
+            <div class="brand-sub">Crypto-Funded Autonomous Grow</div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="badge-stack">
+            <div class="badge" id="runtime-badge">Day 0 · Establishing roots</div>
+            <div class="badge" id="visitor-badge">Visitors: --</div>
+          </div>
+          <div class="status">
+            <span class="dot green"></span>
+            <span id="updated-at">Updated just now</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="live">
+          <div class="section-title">
+            <span class="dot green"></span>
+            Live View · Weed Farm Canopy
+          </div>
+          <div class="live-body">
+            <div class="live-video">
+              <iframe
+                id="yt-player"
+                width="748"
+                height="420"
+                src="https://www.youtube.com/embed/3j01NtPc3Xo?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1"
+                title="Growing."
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="live-log" id="ai-log"></div>
+          </div>
+        </section>
+
+        <section class="sensors">
+          <div class="section-title">
+            <span class="dot yellow"></span>
+            Environmental Sensors
+          </div>
+          <div class="sensor-grid" id="sensor-grid"></div>
+        </section>
+
+        <section class="devices">
+          <div class="section-title">
+            <span class="dot blue"></span>
+            Device Status
+          </div>
+          <div class="device-grid" id="device-grid"></div>
+        </section>
+
+        <section class="tents">
+          <div class="section-title">
+            <span class="dot green"></span>
+            Tents · Gear Loadout
+          </div>
+          <div class="tents-grid" id="tents-grid"></div>
+        </section>
+
+        <section class="log">
+          <div class="section-title">
+            <span class="dot yellow"></span>
+            Grow Log · AI Autonomous Lab
+          </div>
+          <div class="log-grid">
+            <div id="grow-log" class="grow-log"></div>
+            <div class="log-aside">
+              <div class="log-card">
+                <div class="log-card-title">This Week’s Plan</div>
+                <ul id="plan-list" class="plan-list"></ul>
+              </div>
+              <div class="log-card">
+                <div class="log-card-title">Last Actions</div>
+                <div id="recent-actions" class="chips"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="agent">
+          <div class="section-title">
+            <span class="dot pink"></span>
+            AI Status Feed (chat disabled)
+          </div>
+          <p class="muted">Live AI commentary about the weed farm. Viewer chat is currently disabled.</p>
+          <div id="chat-output" class="chat-output"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.14/dist/hls.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+

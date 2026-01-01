@@ -115,6 +115,28 @@ const actionChips = [
   "Exhaust pulsed 10 min",
 ];
 
+const missionTemplates = [
+  "Check canopy temp vs leaf Δ; aim leaf Δ ~ -1°F. If higher, raise light 2 in.",
+  "Verify res at 65-68°F; drop a frozen bottle if over range.",
+  "Stir the soup gently and log EC/pH drift. Target pH 5.7–5.9, EC ~1.2.",
+  "Tuck leaves to open airflow; keep VPD ~1.2–1.4 kPa in veg.",
+  "Inspect roots for slime; if any, prep a 30% water change and sanitize lid.",
+  "Clean sight glass and confirm top-off to the line. DO should stay high.",
+  "Wipe condensation, check fans on low to avoid windburn, keep RH ~40–50%.",
+  "CO₂ off unless sealed; if on, cap ~1000–1200 ppm and vent gently.",
+  "Confirm timer schedule for lights; no light leaks during dark cycle.",
+  "Document today’s drift and next action; consistency wins the grow.",
+];
+
+function randomFrom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function pushMission() {
+  const mission = randomFrom(missionTemplates);
+  pushLog(`MISSION: ${mission}`);
+}
+
 function renderSensors() {
   sensorGrid.innerHTML = sensors
     .map(
@@ -215,15 +237,18 @@ function renderActions() {
     .join("");
 }
 
-function pushLog(message) {
-  const time = new Date().toLocaleTimeString();
-  aiLog.textContent = `[${time}] ${message}\n` + aiLog.textContent;
-}
-
 function setStatus(text) {
   if (chatOutput) {
     chatOutput.textContent = text;
   }
+}
+
+function pushLog(message) {
+  const time = new Date().toLocaleTimeString();
+  const newEntry = `[${time}] ${message}`;
+  const existing = aiLog.textContent ? aiLog.textContent.split("\n") : [];
+  const trimmed = [newEntry, ...existing].slice(0, 80);
+  aiLog.textContent = trimmed.join("\n");
 }
 
 async function fetchStatusTick() {
@@ -254,9 +279,10 @@ async function fetchStatusTick() {
     pushLog(`AI (fallback): ${fallback}`);
   }
 }
-
-// No chat or handle inputs; AI posts status automatically.
-
+pushMission();
+setInterval(pushMission, 45000);
+fetchStatusTick();
+setInterval(fetchStatusTick, 30000);
 renderSensors();
 renderDevices();
 setUpdatedTime();
@@ -267,6 +293,3 @@ renderGrowLog();
 renderPlan();
 renderActions();
 pushLog("AI status feed ready (chat disabled).");
-fetchStatusTick();
-setInterval(fetchStatusTick, 30000);
-
